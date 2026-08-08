@@ -6,7 +6,6 @@ import Board from './pages/Board'
 import CalendarPage from './pages/Calendar'
 import Files from './pages/Files'
 import Members from './pages/Members'
-import Chat from './pages/Chat'
 
 function Gate({ children }) {
   const { session, loading } = useAuth()
@@ -30,7 +29,6 @@ function AppRoutes() {
         <Route path="/board" element={<Board />} />
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/files" element={<Files />} />
-        <Route path="/chat" element={<Chat />} />
         <Route path="/members" element={<Members />} />
       </Route>
       <Route path="*" element={<Navigate to="/board" replace />} />

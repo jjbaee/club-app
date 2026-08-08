@@ -2,11 +2,13 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { MessageSquare, Calendar, FolderOpen, Users, LogOut, Megaphone } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 
+const KAKAO_CHAT_URL = 'https://open.kakao.com/o/g0pBSYDi'
+
 const navItems = [
   { to: '/board', label: '게시판', icon: Megaphone },
   { to: '/calendar', label: '캘린더', icon: Calendar },
   { to: '/files', label: '자료실', icon: FolderOpen },
-  { to: '/chat', label: '채팅', icon: MessageSquare },
+  { href: KAKAO_CHAT_URL, label: '채팅', icon: MessageSquare, external: true },
   { to: '/members', label: '회원', icon: Users },
 ]
 
@@ -38,20 +40,33 @@ export default function Layout() {
         </div>
 
         <nav className="flex-1 space-y-1">
-          {navItems.map(({ to, label, icon: Icon }) => (
-            <NavLink
-              key={to}
-              to={to}
-              className={({ isActive }) =>
-                `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
-                  isActive ? 'bg-coral text-white' : 'text-muted hover:bg-coral-light hover:text-plum'
-                }`
-              }
-            >
-              <Icon size={18} />
-              {label}
-            </NavLink>
-          ))}
+          {navItems.map((item) =>
+            item.external ? (
+              <a
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors text-muted hover:bg-coral-light hover:text-plum"
+              >
+                <item.icon size={18} />
+                {item.label}
+              </a>
+            ) : (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
+                    isActive ? 'bg-coral text-white' : 'text-muted hover:bg-coral-light hover:text-plum'
+                  }`
+                }
+              >
+                <item.icon size={18} />
+                {item.label}
+              </NavLink>
+            )
+          )}
         </nav>
 
         <div className="border-t border-tan pt-4 mt-4">
@@ -87,20 +102,33 @@ export default function Layout() {
 
       {/* 모바일 하단 탭바 */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-tan flex justify-around py-2 z-10">
-        {navItems.map(({ to, label, icon: Icon }) => (
-          <NavLink
-            key={to}
-            to={to}
-            className={({ isActive }) =>
-              `flex flex-col items-center gap-0.5 px-2 py-1 rounded-lg text-xs font-medium ${
-                isActive ? 'text-coral' : 'text-muted'
-              }`
-            }
-          >
-            <Icon size={20} />
-            {label}
-          </NavLink>
-        ))}
+        {navItems.map((item) =>
+          item.external ? (
+            <a
+              key={item.href}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center gap-0.5 px-2 py-1 rounded-lg text-xs font-medium text-muted"
+            >
+              <item.icon size={20} />
+              {item.label}
+            </a>
+          ) : (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) =>
+                `flex flex-col items-center gap-0.5 px-2 py-1 rounded-lg text-xs font-medium ${
+                  isActive ? 'text-coral' : 'text-muted'
+                }`
+              }
+            >
+              <item.icon size={20} />
+              {item.label}
+            </NavLink>
+          )
+        )}
       </nav>
     </div>
   )
