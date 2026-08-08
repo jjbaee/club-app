@@ -65,10 +65,10 @@ export default function Files() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="font-display text-2xl font-semibold text-plum">자료실</h1>
-          <p className="text-sm text-muted mt-0.5">동아리 자료를 올리고 받아가요</p>
+          <p className="text-sm text-muted mt-0.5">동아리 자료를 공유해요</p>
         </div>
         <label className="flex items-center gap-1.5 bg-coral text-white rounded-xl px-4 py-2.5 text-sm font-semibold hover:bg-coral-dark transition-colors cursor-pointer">
-          <Upload size={16} /> {uploading ? '업로드 중...' : '파일 업로드'}
+          <Upload size={16} /> {uploading ? '업로드 중...' : '업로드'}
           <input ref={inputRef} type="file" onChange={handleUpload} disabled={uploading} className="hidden" />
         </label>
       </div>

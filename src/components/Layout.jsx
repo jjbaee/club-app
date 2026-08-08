@@ -10,6 +10,22 @@ const navItems = [
   { to: '/members', label: '회원', icon: Users },
 ]
 
+function BrandLogo({ compact = false }) {
+  return (
+    <div className="flex items-center gap-2 min-w-0">
+      <div className={`${compact ? 'h-8 w-8 text-base' : 'h-9 w-9 text-lg'} rounded-xl bg-coral flex items-center justify-center shrink-0`}>
+        🌱
+      </div>
+      <div className="flex flex-col items-start leading-tight min-w-0">
+        <span className={`font-display font-bold text-plum truncate ${compact ? 'text-lg' : 'text-xl'}`}>
+          평생학습동아리
+        </span>
+        <span className="font-display text-muted truncate text-xs">화성시민대학</span>
+      </div>
+    </div>
+  )
+}
+
 export default function Layout() {
   const { profile, signOut } = useAuth()
 
@@ -17,9 +33,8 @@ export default function Layout() {
     <div className="min-h-screen bg-cream md:flex">
       {/* 데스크탑 사이드바 - 화면에 고정, 콘텐츠 길이와 무관하게 항상 같은 위치 */}
       <aside className="hidden md:flex md:fixed md:inset-y-0 md:left-0 md:w-60 md:flex-col md:border-r md:border-tan bg-white/60 p-5 md:overflow-y-auto">
-        <div className="flex items-center gap-2 mb-8 px-1">
-          <div className="h-9 w-9 rounded-xl bg-coral flex items-center justify-center text-lg">🌱</div>
-          <span className="font-display text-xl font-semibold text-plum">평생학습 동아리</span>
+        <div className="mb-8 px-1">
+          <BrandLogo />
         </div>
 
         <nav className="flex-1 space-y-1">
@@ -59,13 +74,12 @@ export default function Layout() {
       </aside>
 
       {/* 모바일 상단 헤더 - 스크롤과 무관하게 항상 화면 최상단에 고정 */}
-      <header className="md:hidden fixed top-0 left-0 right-0 z-20 flex items-center gap-2 bg-white/95 backdrop-blur border-b border-tan px-4 py-3">
-        <div className="h-8 w-8 rounded-lg bg-coral flex items-center justify-center text-base shrink-0">🌱</div>
-        <span className="font-display text-lg font-semibold text-plum truncate">평생학습 동아리</span>
+      <header className="md:hidden fixed top-0 left-0 right-0 z-20 flex items-center bg-white/95 backdrop-blur border-b border-tan px-4 py-2.5">
+        <BrandLogo compact />
       </header>
 
       {/* 메인 컨텐츠 */}
-      <main className="flex-1 pt-16 pb-20 md:pt-0 md:pb-0 md:ml-60">
+      <main className="flex-1 pt-[4.5rem] pb-20 md:pt-0 md:pb-0 md:ml-60">
         <div className="max-w-3xl mx-auto px-4 py-6 md:px-8 md:py-8">
           <Outlet />
         </div>

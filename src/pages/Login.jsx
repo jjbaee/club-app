@@ -41,8 +41,9 @@ export default function Login() {
           <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-coral text-cream text-2xl font-display font-semibold shadow-warm mb-4">
             🌱
           </div>
-          <h1 className="font-display text-3xl font-semibold text-plum">평생학습 동아리</h1>
-          <p className="text-muted mt-1 text-sm">
+          <h1 className="font-display text-3xl font-bold text-plum">평생학습동아리</h1>
+          <p className="font-display text-muted text-sm mt-0.5">화성시민대학</p>
+          <p className="text-muted mt-3 text-sm">
             {mode === 'signin' ? '다시 만나서 반가워요' : '우리 동아리에 오신 걸 환영해요'}
           </p>
         </div>

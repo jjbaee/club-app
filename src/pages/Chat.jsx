@@ -8,10 +8,24 @@ export default function Chat() {
   const [messages, setMessages] = useState([])
   const [text, setText] = useState('')
   const scrollAreaRef = useRef(null)
+  const formRef = useRef(null)
+  const [formHeight, setFormHeight] = useState(76)
 
   // 채팅방에 들어올 때 페이지 전체는 항상 맨 위(로고가 보이는 위치)에서 시작
   useEffect(() => {
     window.scrollTo(0, 0)
+  }, [])
+
+  // 입력창의 실제 렌더링 높이를 계속 측정 - 기기/화면 크기에 상관없이
+  // 메시지 영역이 입력창에 가려지지 않도록 정확한 여백을 계산하기 위함
+  useEffect(() => {
+    const el = formRef.current
+    if (!el) return
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) setFormHeight(entry.contentRect.height)
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
   }, [])
 
   useEffect(() => {
@@ -44,7 +58,7 @@ export default function Chat() {
     // 채팅 내부 스크롤 영역만 맨 아래로 이동시키고, 바깥 페이지 스크롤에는 영향 없게 처리
     const el = scrollAreaRef.current
     if (el) el.scrollTop = el.scrollHeight
-  }, [messages])
+  }, [messages, formHeight])
 
   const handleSend = async (e) => {
     e.preventDefault()
@@ -56,10 +70,15 @@ export default function Chat() {
 
   return (
     <>
-      <div className="flex flex-col h-[calc(100vh-13.5rem)] md:h-[calc(100vh-10.5rem)]">
-        <h1 className="font-display text-2xl font-semibold text-plum mb-4">채팅방</h1>
+      {/* 채팅 내용 영역 - 입력창과 완전히 분리된 별도 스크롤 공간 */}
+      <div className="flex flex-col h-[calc(100dvh-9.5rem)] md:h-[calc(100dvh-6rem)]">
+        <h1 className="font-display text-2xl font-semibold text-plum mb-4 shrink-0">채팅방</h1>
 
-        <div ref={scrollAreaRef} className="flex-1 overflow-y-auto overscroll-contain bg-white rounded-xl2 shadow-warm p-4 space-y-3">
+        <div
+          ref={scrollAreaRef}
+          className="flex-1 overflow-y-auto overscroll-contain bg-white rounded-xl2 shadow-warm p-4 space-y-3"
+          style={{ paddingBottom: formHeight + 16 }}
+        >
           {messages.length === 0 && (
             <p className="text-center text-muted text-sm py-10">첫 메시지를 보내보세요 💬</p>
           )}
@@ -79,8 +98,9 @@ export default function Chat() {
         </div>
       </div>
 
-      {/* 메시지 입력창 - 스크롤과 무관하게 항상 화면 하단에 고정 (모바일 하단탭 바로 위, PC는 화면 맨 아래) */}
+      {/* 메시지 입력창 - 채팅 내용 영역과 완전히 분리된 별도 고정 레이어 */}
       <form
+        ref={formRef}
         onSubmit={handleSend}
         className="fixed left-0 right-0 bottom-16 md:bottom-0 md:left-60 z-20 flex items-center gap-2 bg-cream/95 backdrop-blur border-t border-tan px-4 py-3"
       >
