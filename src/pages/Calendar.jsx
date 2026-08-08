@@ -71,14 +71,14 @@ export default function CalendarPage() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl font-semibold text-plum">캘린더</h1>
         <div className="flex items-center gap-2">
-          <button onClick={() => setCursor(new Date(year, month - 1, 1))} className="p-2 rounded-lg hover:bg-coral-light text-plum/60"><ChevronLeft size={18} /></button>
+          <button onClick={() => setCursor(new Date(year, month - 1, 1))} className="p-2 rounded-lg hover:bg-coral-light text-muted"><ChevronLeft size={18} /></button>
           <span className="font-semibold text-plum w-24 text-center">{year}.{String(month + 1).padStart(2, '0')}</span>
-          <button onClick={() => setCursor(new Date(year, month + 1, 1))} className="p-2 rounded-lg hover:bg-coral-light text-plum/60"><ChevronRight size={18} /></button>
+          <button onClick={() => setCursor(new Date(year, month + 1, 1))} className="p-2 rounded-lg hover:bg-coral-light text-muted"><ChevronRight size={18} /></button>
         </div>
       </div>
 
       <div className="bg-white rounded-xl2 shadow-warm p-4">
-        <div className="grid grid-cols-7 text-center text-xs font-semibold text-plum/40 mb-2">
+        <div className="grid grid-cols-7 text-center text-xs font-semibold text-muted mb-2">
           {WEEKDAYS.map(w => <div key={w}>{w}</div>)}
         </div>
         <div className="grid grid-cols-7 gap-1">
@@ -112,15 +112,15 @@ export default function CalendarPage() {
             <Plus size={15} /> 일정 추가
           </button>
         </div>
-        {selectedEvents.length === 0 && <p className="text-plum/40 text-sm">등록된 일정이 없어요.</p>}
+        {selectedEvents.length === 0 && <p className="text-muted text-sm">등록된 일정이 없어요.</p>}
         <div className="space-y-2">
           {selectedEvents.map(ev => (
             <div key={ev.id} className="bg-white rounded-xl p-4 shadow-warm flex items-start justify-between gap-3">
               <div>
                 <p className="font-medium text-plum">{ev.title}</p>
-                {ev.description && <p className="text-sm text-plum/60 mt-0.5">{ev.description}</p>}
+                {ev.description && <p className="text-sm text-muted mt-0.5">{ev.description}</p>}
               </div>
-              <button onClick={() => handleDelete(ev.id)} className="text-plum/30 hover:text-coral-dark shrink-0"><Trash2 size={16} /></button>
+              <button onClick={() => handleDelete(ev.id)} className="text-muted hover:text-coral-dark shrink-0"><Trash2 size={16} /></button>
             </div>
           ))}
         </div>
@@ -131,7 +131,7 @@ export default function CalendarPage() {
           <div className="bg-white rounded-t-2xl md:rounded-xl2 w-full md:max-w-md p-6 shadow-warm-lg">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-display text-xl font-semibold text-plum">{selectedDate} 일정 추가</h2>
-              <button onClick={() => setShowForm(false)} className="text-plum/40 hover:text-plum"><X size={20} /></button>
+              <button onClick={() => setShowForm(false)} className="text-muted hover:text-plum"><X size={20} /></button>
             </div>
             <form onSubmit={handleSubmit} className="space-y-3">
               <input type="text" placeholder="일정 제목" value={title} onChange={(e) => setTitle(e.target.value)}

@@ -29,7 +29,7 @@ export default function Layout() {
               to={to}
               className={({ isActive }) =>
                 `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
-                  isActive ? 'bg-coral text-white' : 'text-plum/70 hover:bg-coral-light hover:text-plum'
+                  isActive ? 'bg-coral text-white' : 'text-muted hover:bg-coral-light hover:text-plum'
                 }`
               }
             >
@@ -46,12 +46,12 @@ export default function Layout() {
             </div>
             <div className="min-w-0">
               <p className="text-sm font-medium text-plum truncate">{profile?.name ?? '회원'}</p>
-              <p className="text-xs text-plum/50">{profile?.role === 'admin' ? '관리자' : '일반회원'}</p>
+              <p className="text-xs text-muted">{profile?.role === 'admin' ? '관리자' : '일반회원'}</p>
             </div>
           </div>
           <button
             onClick={signOut}
-            className="flex items-center gap-2 w-full rounded-xl px-3 py-2 text-sm text-plum/60 hover:bg-coral-light hover:text-coral-dark transition-colors"
+            className="flex items-center gap-2 w-full rounded-xl px-3 py-2 text-sm text-muted hover:bg-coral-light hover:text-coral-dark transition-colors"
           >
             <LogOut size={16} /> 로그아웃
           </button>
@@ -79,7 +79,7 @@ export default function Layout() {
             to={to}
             className={({ isActive }) =>
               `flex flex-col items-center gap-0.5 px-2 py-1 rounded-lg text-xs font-medium ${
-                isActive ? 'text-coral' : 'text-plum/50'
+                isActive ? 'text-coral' : 'text-muted'
               }`
             }
           >

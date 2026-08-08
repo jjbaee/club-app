@@ -59,16 +59,16 @@ export default function Chat() {
       <div className="flex flex-col h-[calc(100vh-13.5rem)] md:h-[calc(100vh-10.5rem)]">
         <h1 className="font-display text-2xl font-semibold text-plum mb-4">채팅방</h1>
 
-        <div ref={scrollAreaRef} className="flex-1 overflow-y-auto bg-white rounded-xl2 shadow-warm p-4 space-y-3">
+        <div ref={scrollAreaRef} className="flex-1 overflow-y-auto overscroll-contain bg-white rounded-xl2 shadow-warm p-4 space-y-3">
           {messages.length === 0 && (
-            <p className="text-center text-plum/40 text-sm py-10">첫 메시지를 보내보세요 💬</p>
+            <p className="text-center text-muted text-sm py-10">첫 메시지를 보내보세요 💬</p>
           )}
           {messages.map((m) => {
             const isMine = m.sender_id === user.id
             return (
               <div key={m.id} className={`flex ${isMine ? 'justify-end' : 'justify-start'}`}>
                 <div className={`max-w-[75%] ${isMine ? 'items-end' : 'items-start'} flex flex-col`}>
-                  {!isMine && <span className="text-xs text-plum/40 mb-0.5 px-1">{m.profiles?.name ?? '회원'}</span>}
+                  {!isMine && <span className="text-xs text-muted mb-0.5 px-1">{m.profiles?.name ?? '회원'}</span>}
                   <div className={`rounded-2xl px-4 py-2 text-sm ${isMine ? 'bg-coral text-white rounded-br-sm' : 'bg-cream text-plum rounded-bl-sm'}`}>
                     {m.content}
                   </div>

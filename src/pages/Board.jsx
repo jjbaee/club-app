@@ -49,7 +49,7 @@ export default function Board() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="font-display text-2xl font-semibold text-plum">게시판</h1>
-          <p className="text-sm text-plum/50 mt-0.5">공지사항과 소식을 나눠요</p>
+          <p className="text-sm text-muted mt-0.5">공지사항과 소식을 나눠요</p>
         </div>
         <button
           onClick={() => setShowForm(true)}
@@ -59,9 +59,9 @@ export default function Board() {
         </button>
       </div>
 
-      {loading && <p className="text-plum/40 text-sm">불러오는 중...</p>}
+      {loading && <p className="text-muted text-sm">불러오는 중...</p>}
       {!loading && posts.length === 0 && (
-        <div className="text-center py-16 text-plum/40">
+        <div className="text-center py-16 text-muted">
           <p className="text-4xl mb-2">📭</p>
           <p>아직 글이 없어요. 첫 글을 남겨보세요!</p>
         </div>
@@ -80,13 +80,13 @@ export default function Board() {
                   )}
                   <h3 className="font-semibold text-plum truncate">{post.title}</h3>
                 </div>
-                <p className="text-plum/70 text-sm whitespace-pre-wrap">{post.content}</p>
-                <p className="text-xs text-plum/40 mt-3">
+                <p className="text-muted text-sm whitespace-pre-wrap">{post.content}</p>
+                <p className="text-xs text-muted mt-3">
                   {post.profiles?.name ?? '알 수 없음'} · {new Date(post.created_at).toLocaleDateString('ko-KR')}
                 </p>
               </div>
               {(post.author_id === user.id || isAdmin) && (
-                <button onClick={() => handleDelete(post.id)} className="text-plum/30 hover:text-coral-dark shrink-0">
+                <button onClick={() => handleDelete(post.id)} className="text-muted hover:text-coral-dark shrink-0">
                   <Trash2 size={16} />
                 </button>
               )}
@@ -100,7 +100,7 @@ export default function Board() {
           <div className="bg-white rounded-t-2xl md:rounded-xl2 w-full md:max-w-md p-6 shadow-warm-lg">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-display text-xl font-semibold text-plum">새 글 작성</h2>
-              <button onClick={() => setShowForm(false)} className="text-plum/40 hover:text-plum"><X size={20} /></button>
+              <button onClick={() => setShowForm(false)} className="text-muted hover:text-plum"><X size={20} /></button>
             </div>
             <form onSubmit={handleSubmit} className="space-y-3">
               <input
@@ -113,7 +113,7 @@ export default function Board() {
                 className="w-full rounded-xl border border-tan px-4 py-2.5 focus:border-coral focus:outline-none resize-none"
               />
               {isAdmin && (
-                <label className="flex items-center gap-2 text-sm text-plum/70">
+                <label className="flex items-center gap-2 text-sm text-muted">
                   <input type="checkbox" checked={isNotice} onChange={(e) => setIsNotice(e.target.checked)} className="accent-coral" />
                   공지사항으로 등록
                 </label>

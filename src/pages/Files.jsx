@@ -65,7 +65,7 @@ export default function Files() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="font-display text-2xl font-semibold text-plum">자료실</h1>
-          <p className="text-sm text-plum/50 mt-0.5">동아리 자료를 올리고 받아가요</p>
+          <p className="text-sm text-muted mt-0.5">동아리 자료를 올리고 받아가요</p>
         </div>
         <label className="flex items-center gap-1.5 bg-coral text-white rounded-xl px-4 py-2.5 text-sm font-semibold hover:bg-coral-dark transition-colors cursor-pointer">
           <Upload size={16} /> {uploading ? '업로드 중...' : '파일 업로드'}
@@ -73,9 +73,9 @@ export default function Files() {
         </label>
       </div>
 
-      {loading && <p className="text-plum/40 text-sm">불러오는 중...</p>}
+      {loading && <p className="text-muted text-sm">불러오는 중...</p>}
       {!loading && files.length === 0 && (
-        <div className="text-center py-16 text-plum/40">
+        <div className="text-center py-16 text-muted">
           <p className="text-4xl mb-2">🗂️</p>
           <p>아직 업로드된 자료가 없어요.</p>
         </div>
@@ -90,17 +90,17 @@ export default function Files() {
               </div>
               <div className="min-w-0">
                 <p className="font-medium text-plum truncate">{f.file_name}</p>
-                <p className="text-xs text-plum/40">
+                <p className="text-xs text-muted">
                   {f.profiles?.name ?? '알 수 없음'} · {new Date(f.created_at).toLocaleDateString('ko-KR')}
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-1 shrink-0">
-              <button onClick={() => handleDownload(f)} className="p-2 rounded-lg hover:bg-coral-light text-plum/60 hover:text-coral-dark">
+              <button onClick={() => handleDownload(f)} className="p-2 rounded-lg hover:bg-coral-light text-muted hover:text-coral-dark">
                 <Download size={16} />
               </button>
               {(f.uploader_id === user.id || isAdmin) && (
-                <button onClick={() => handleDelete(f)} className="p-2 rounded-lg hover:bg-coral-light text-plum/30 hover:text-coral-dark">
+                <button onClick={() => handleDelete(f)} className="p-2 rounded-lg hover:bg-coral-light text-muted hover:text-coral-dark">
                   <Trash2 size={16} />
                 </button>
               )}

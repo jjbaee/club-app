@@ -2,15 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  overscroll-behavior-y: contain;
+}
+
 body {
   background-color: #EAF4EC;
-  color: #22322A;
-  font-family: 'Gowun Dodum', sans-serif;
+  color: #000000;
+  font-family: 'Nanum Gothic', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, .font-display {
-  font-family: 'Gowun Dodum', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* 배경대비 시인성 확보: placeholder도 흐리지 않게 짙은 회색으로 */
+::placeholder {
+  color: #404040;
+  opacity: 1;
 }
 
 /* 접근성: 키보드 포커스 표시 */

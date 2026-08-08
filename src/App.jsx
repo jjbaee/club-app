@@ -12,7 +12,7 @@ function Gate({ children }) {
   const { session, loading } = useAuth()
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-cream text-plum/40">
+      <div className="min-h-screen flex items-center justify-center bg-cream text-muted">
         불러오는 중...
       </div>
     )

@@ -27,10 +27,10 @@ export default function Members() {
     <div>
       <div className="mb-6">
         <h1 className="font-display text-2xl font-semibold text-plum">회원목록</h1>
-        <p className="text-sm text-plum/50 mt-0.5">총 {members.length}명의 회원이 함께하고 있어요</p>
+        <p className="text-sm text-muted mt-0.5">총 {members.length}명의 회원이 함께하고 있어요</p>
       </div>
 
-      {loading && <p className="text-plum/40 text-sm">불러오는 중...</p>}
+      {loading && <p className="text-muted text-sm">불러오는 중...</p>}
 
       <div className="space-y-2">
         {members.map((m) => (
@@ -42,9 +42,9 @@ export default function Members() {
               <div className="min-w-0">
                 <p className="font-medium text-plum truncate flex items-center gap-1.5">
                   {m.name}
-                  {m.id === user.id && <span className="text-xs text-plum/40">(나)</span>}
+                  {m.id === user.id && <span className="text-xs text-muted">(나)</span>}
                 </p>
-                <p className="text-xs text-plum/40">
+                <p className="text-xs text-muted">
                   {new Date(m.created_at).toLocaleDateString('ko-KR')} 가입
                 </p>
               </div>
@@ -55,7 +55,7 @@ export default function Members() {
                 <button
                   onClick={() => toggleRole(m)}
                   className={`flex items-center gap-1 text-xs font-semibold rounded-full px-3 py-1.5 transition-colors ${
-                    m.role === 'admin' ? 'bg-coral text-white hover:bg-coral-dark' : 'bg-cream text-plum/60 hover:bg-coral-light'
+                    m.role === 'admin' ? 'bg-coral text-white hover:bg-coral-dark' : 'bg-cream text-muted hover:bg-coral-light'
                   }`}
                 >
                   {m.role === 'admin' ? <Shield size={12} /> : <User size={12} />}
@@ -63,7 +63,7 @@ export default function Members() {
                 </button>
               ) : (
                 <span className={`flex items-center gap-1 text-xs font-semibold rounded-full px-3 py-1.5 ${
-                  m.role === 'admin' ? 'bg-coral-light text-coral-dark' : 'bg-cream text-plum/50'
+                  m.role === 'admin' ? 'bg-coral-light text-coral-dark' : 'bg-cream text-muted'
                 }`}>
                   {m.role === 'admin' ? <Shield size={12} /> : <User size={12} />}
                   {m.role === 'admin' ? '관리자' : '일반회원'}

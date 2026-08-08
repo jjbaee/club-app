@@ -10,7 +10,8 @@ export default {
           dark: "#2F7048",
           light: "#D8EEDD",
         },
-        plum: "#22322A",
+        plum: "#000000",
+        muted: "#404040",
         sage: {
           DEFAULT: "#5B9AA0",
           light: "#DCEEF0",
@@ -19,8 +20,8 @@ export default {
         tan: "#CFE0D2",
       },
       fontFamily: {
-        display: ["'Gowun Dodum'", "sans-serif"],
-        body: ["'Gowun Dodum'", "sans-serif"],
+        display: ["'Nanum Gothic'", "sans-serif"],
+        body: ["'Nanum Gothic'", "sans-serif"],
       },
       borderRadius: {
         xl2: "1.25rem",

@@ -42,7 +42,7 @@ export default function Login() {
             🌱
           </div>
           <h1 className="font-display text-3xl font-semibold text-plum">평생학습 동아리</h1>
-          <p className="text-plum/60 mt-1 text-sm">
+          <p className="text-muted mt-1 text-sm">
             {mode === 'signin' ? '다시 만나서 반가워요' : '우리 동아리에 오신 걸 환영해요'}
           </p>
         </div>
@@ -56,7 +56,7 @@ export default function Login() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full rounded-xl border border-tan bg-cream/50 px-4 py-3 text-plum placeholder:text-plum/40 focus:border-coral focus:outline-none"
+                className="w-full rounded-xl border border-tan bg-cream/50 px-4 py-3 text-plum placeholder:text-muted focus:border-coral focus:outline-none"
               />
             )}
             <input
@@ -65,7 +65,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full rounded-xl border border-tan bg-cream/50 px-4 py-3 text-plum placeholder:text-plum/40 focus:border-coral focus:outline-none"
+              className="w-full rounded-xl border border-tan bg-cream/50 px-4 py-3 text-plum placeholder:text-muted focus:border-coral focus:outline-none"
             />
             <input
               type="password"
@@ -74,7 +74,7 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
-              className="w-full rounded-xl border border-tan bg-cream/50 px-4 py-3 text-plum placeholder:text-plum/40 focus:border-coral focus:outline-none"
+              className="w-full rounded-xl border border-tan bg-cream/50 px-4 py-3 text-plum placeholder:text-muted focus:border-coral focus:outline-none"
             />
 
             {error && <p className="text-sm text-coral-dark bg-coral-light rounded-lg px-3 py-2">{error}</p>}
@@ -91,7 +91,7 @@ export default function Login() {
 
           <div className="flex items-center gap-3 my-4">
             <div className="h-px flex-1 bg-tan" />
-            <span className="text-xs text-plum/40">또는</span>
+            <span className="text-xs text-muted">또는</span>
             <div className="h-px flex-1 bg-tan" />
           </div>
 
@@ -108,7 +108,7 @@ export default function Login() {
             구글로 계속하기
           </button>
 
-          <p className="text-center text-sm text-plum/60 mt-5">
+          <p className="text-center text-sm text-muted mt-5">
             {mode === 'signin' ? '아직 회원이 아니신가요?' : '이미 계정이 있으신가요?'}{' '}
             <button
               onClick={() => { setMode(mode === 'signin' ? 'signup' : 'signin'); setError(''); setMessage('') }}
