@@ -47,7 +47,13 @@ export default function Files() {
     }
 
     setUploading(true)
-    const path = `${user.id}/${Date.now()}_${file.name}`
+    // Supabase Storage 경로(key)는 한글을 포함한 일부 문자를 허용하지 않아
+    // "Invalid key" 오류가 날 수 있다. 저장 경로는 확장자만 남긴 영문/숫자 조합으로
+    // 안전하게 만들고, 화면에 보여줄 원래 파일명(한글 포함)은 DB의 file_name에 그대로 저장한다.
+    const extMatch = file.name.match(/\.[a-zA-Z0-9]+$/)
+    const ext = extMatch ? extMatch[0] : ''
+    const safeId = `${Date.now()}_${Math.random().toString(36).slice(2, 8)}${ext}`
+    const path = `${user.id}/${safeId}`
     const { error: uploadError } = await supabase.storage.from('files').upload(path, file)
     if (uploadError) {
       alert('업로드 실패: ' + uploadError.message)
