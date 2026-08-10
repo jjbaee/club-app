@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { MessageSquare, Calendar, FolderOpen, Users, LogOut, Megaphone } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 
 const KAKAO_CHAT_URL = 'https://open.kakao.com/o/g0pBSYDi'
+const KAKAO_TIP_SEEN_KEY = 'kakaoChatTipSeen'
 
 const navItems = [
   { to: '/board', label: '게시판', icon: Megaphone },
@@ -30,6 +32,25 @@ function BrandLogo({ compact = false }) {
 
 export default function Layout() {
   const { profile, signOut } = useAuth()
+  const [showKakaoTip, setShowKakaoTip] = useState(false)
+  const [pendingHref, setPendingHref] = useState(null)
+
+  const handleExternalClick = (href) => {
+    const seen = localStorage.getItem(KAKAO_TIP_SEEN_KEY)
+    if (seen) {
+      window.open(href, '_blank', 'noopener,noreferrer')
+    } else {
+      setPendingHref(href)
+      setShowKakaoTip(true)
+    }
+  }
+
+  const confirmGoToKakao = () => {
+    localStorage.setItem(KAKAO_TIP_SEEN_KEY, '1')
+    setShowKakaoTip(false)
+    if (pendingHref) window.open(pendingHref, '_blank', 'noopener,noreferrer')
+    setPendingHref(null)
+  }
 
   return (
     <div className="min-h-screen bg-cream md:flex">
@@ -42,16 +63,14 @@ export default function Layout() {
         <nav className="flex-1 space-y-1">
           {navItems.map((item) =>
             item.external ? (
-              <a
+              <button
                 key={item.href}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors text-muted hover:bg-coral-light hover:text-plum"
+                onClick={() => handleExternalClick(item.href)}
+                className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors text-muted hover:bg-coral-light hover:text-plum w-full text-left"
               >
                 <item.icon size={18} />
                 {item.label}
-              </a>
+              </button>
             ) : (
               <NavLink
                 key={item.to}
@@ -111,16 +130,14 @@ export default function Layout() {
       <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-tan flex justify-around py-2 z-10">
         {navItems.map((item) =>
           item.external ? (
-            <a
+            <button
               key={item.href}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => handleExternalClick(item.href)}
               className="flex flex-col items-center gap-0.5 px-2 py-1 rounded-lg text-xs font-medium text-muted"
             >
               <item.icon size={20} />
               {item.label}
-            </a>
+            </button>
           ) : (
             <NavLink
               key={item.to}
@@ -137,6 +154,25 @@ export default function Layout() {
           )
         )}
       </nav>
+
+      {showKakaoTip && (
+        <div className="fixed inset-0 bg-plum/30 flex items-center justify-center z-30 p-4">
+          <div className="bg-white rounded-xl2 w-full max-w-xs p-6 shadow-warm-lg text-center">
+            <p className="text-3xl mb-3">💬</p>
+            <h2 className="font-display text-lg font-bold text-plum mb-2">카카오톡으로 이동해요</h2>
+            <p className="text-sm text-muted leading-relaxed mb-5">
+              채팅 후 다시 돌아오시려면, 폰의 <b>'최근 앱' 목록</b>을 이용하시거나
+              이 앱을 <b>홈 화면에 추가</b>해두시면 편해요.
+            </p>
+            <button
+              onClick={confirmGoToKakao}
+              className="w-full bg-coral text-white rounded-xl py-3 text-sm font-semibold hover:bg-coral-dark transition-colors"
+            >
+              카카오톡 열기
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
