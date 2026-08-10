@@ -89,8 +89,15 @@ export default function Layout() {
       </aside>
 
       {/* 모바일 상단 헤더 - 스크롤과 무관하게 항상 화면 최상단에 고정 */}
-      <header className="md:hidden fixed top-0 left-0 right-0 z-20 flex items-center bg-white/95 backdrop-blur border-b border-tan px-4 py-2.5">
+      <header className="md:hidden fixed top-0 left-0 right-0 z-20 flex items-center justify-between bg-white/95 backdrop-blur border-b border-tan px-4 py-2.5">
         <BrandLogo compact />
+        <button
+          onClick={() => { if (confirm('로그아웃 하시겠어요?')) signOut() }}
+          aria-label="로그아웃"
+          className="p-2 -mr-2 rounded-lg text-muted hover:bg-coral-light hover:text-coral-dark transition-colors shrink-0"
+        >
+          <LogOut size={20} />
+        </button>
       </header>
 
       {/* 메인 컨텐츠 */}
