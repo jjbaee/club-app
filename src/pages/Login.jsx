@@ -46,7 +46,7 @@ export default function Login() {
             <p className="text-sm font-bold text-plum mb-1">📱 카카오톡(또는 앱) 브라우저로 접속하셨네요</p>
             <p className="text-sm text-muted leading-relaxed mb-2">
               이 상태에서는 구글 로그인이 제한되거나 추가 확인 절차가 번거롭게 뜰 수 있어요.
-              화면 오른쪽 아래(또는 위쪽)의 <b>'···'</b> 버튼을 눌러 <b>'다른 브라우저로 열기'</b>를 선택해주세요.
+              화면 오른쪽 아래(또는 위쪽)의 <b>'⋮'</b> 버튼을 눌러 <b>'다른 브라우저로 열기'</b>를 선택해주세요.
             </p>
             <p className="text-sm text-muted leading-relaxed">
               이메일/비밀번호 로그인은 이 화면에서도 바로 사용하실 수 있어요.
