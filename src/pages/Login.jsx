@@ -11,6 +11,10 @@ export default function Login() {
   const [message, setMessage] = useState('')
   const [busy, setBusy] = useState(false)
 
+  // 카카오톡 등 인앱 브라우저에서는 구글 로그인이 제한되거나 번거로운 추가 확인이
+  // 뜨는 경우가 많아, 감지되면 "다른 브라우저로 열기" 안내를 미리 보여준다.
+  const isInAppBrowser = typeof navigator !== 'undefined' && /KAKAOTALK|NAVER|Instagram|FBAN|FBAV|Line/i.test(navigator.userAgent)
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
@@ -37,6 +41,18 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-cream px-4">
       <div className="w-full max-w-sm">
+        {isInAppBrowser && (
+          <div className="mb-4 rounded-xl border border-gold bg-gold/15 p-4">
+            <p className="text-sm font-bold text-plum mb-1">📱 카카오톡(또는 앱) 브라우저로 접속하셨네요</p>
+            <p className="text-sm text-muted leading-relaxed mb-2">
+              이 상태에서는 구글 로그인이 제한되거나 추가 확인 절차가 번거롭게 뜰 수 있어요.
+              화면 오른쪽 아래(또는 위쪽)의 <b>'···'</b> 버튼을 눌러 <b>'다른 브라우저로 열기'</b>를 선택해주세요.
+            </p>
+            <p className="text-sm text-muted leading-relaxed">
+              이메일/비밀번호 로그인은 이 화면에서도 바로 사용하실 수 있어요.
+            </p>
+          </div>
+        )}
         <div className="text-center mb-8">
           <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-coral text-cream text-2xl font-display font-semibold shadow-warm mb-4">
             🌱
